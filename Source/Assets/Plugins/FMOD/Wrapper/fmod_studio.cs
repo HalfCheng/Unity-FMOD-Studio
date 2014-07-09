@@ -70,11 +70,11 @@ namespace FMOD {
 
 		[StructLayout(LayoutKind.Sequential)]
 		public struct BufferInfo {
-			public int currentUsage;                    /* Current buffer usage in bytes. */
-			public int peakUsage;                       /* Peak buffer usage in bytes. */
-			public int capacity;                        /* Buffer capacity in bytes. */
-			public int stallCount;                      /* Number of stalls due to buffer overflow. */
-			public float stallTime;                     /* Amount of time stalled due to buffer overflow, in seconds. */
+			public int currentUsage;          /* Current buffer usage in bytes. */
+			public int peakUsage;             /* Peak buffer usage in bytes. */
+			public int capacity;              /* Buffer capacity in bytes. */
+			public int stallCount;            /* Number of stalls due to buffer overflow. */
+			public float stallTime;           /* Amount of time stalled due to buffer overflow, in seconds. */
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -85,9 +85,9 @@ namespace FMOD {
 
 		[StructLayout(LayoutKind.Sequential)]
 		public struct BankInfo {
-			public int size;                            /* The size of this struct (for binary compatibility) */
-			public IntPtr userData;                     /* User data to be passed to the file callbacks */
-			public int userDataLength;                  /* If this is non-zero, userData will be copied internally */
+			public int size;                           /* The size of this struct (for binary compatibility) */
+			public IntPtr userData;                    /* User data to be passed to the file callbacks */
+			public int userDataLength;                 /* If this is non-zero, userData will be copied internally */
 			public FileOpenCallback openCallback;      /* Callback for opening this file. */
 			public FileCloseCallback closeCallback;    /* Callback for closing this file. */
 			public FileReadCallback readCallback;      /* Callback for reading from this file. */
@@ -237,13 +237,13 @@ namespace FMOD {
 		}
 
 		public struct UserProperty {
-			public string name;                /* Name of the user property. */
-			public UserPropertyType type;    /* Type of the user property. Use this to select one of the following values. */
+			public string name;           /* Name of the user property. */
+			public UserPropertyType type; /* Type of the user property. Use this to select one of the following values. */
 
-			public int intValue;               /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.INTEGER. */
-			public bool boolValue;             /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.BOOLEAN. */
-			public float floatValue;           /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.FLOAT. */
-			public string stringValue;         /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.STRING. */
+			public int intValue;          /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.INTEGER. */
+			public bool boolValue;        /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.BOOLEAN. */
+			public float floatValue;      /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.FLOAT. */
+			public string stringValue;    /* Value of the user property. Only valid when type is USER_PROPERTY_TYPE.STRING. */
 		};
 
 		#region Wrapper Internal Methods
@@ -297,21 +297,21 @@ namespace FMOD {
 
 		[Flags]
 		public enum InitFlags {
-			Normal = 0x00000000,   /* Initialize normally. */
-			LiveUpdate = 0x00000001,   /* Enable live update. */
-			AllowMissingPlugins = 0x00000002,   /* Load banks even if they reference plugins that have not been loaded. */
+			Normal = 0x00000000,              /* Initialize normally. */
+			LiveUpdate = 0x00000001,          /* Enable live update. */
+			AllowMissingPlugins = 0x00000002, /* Load banks even if they reference plugins that have not been loaded. */
 			SynchronousUpdate = 0x00000004,   /* Disable asynchronous processing and perform all processing on the calling thread instead. */
 		}
 
 		[Flags]
 		public enum LoadBankFlags {
-			Normal = 0x00000000,   /* Standard behaviour. */
-			NonBlocking = 0x00000001,   /* Bank loading occurs asynchronously rather than occurring immediately. */
+			Normal = 0x00000000,      /* Standard behaviour. */
+			NonBlocking = 0x00000001, /* Bank loading occurs asynchronously rather than occurring immediately. */
 		}
 
 		[Flags]
 		public enum RecordCommandsFlags {
-			Normal = 0x00000000,   /* Standard behaviour. */
+			Normal = 0x00000000,      /* Standard behaviour. */
 			FileFlush = 0x00000001,   /* Call file flush on every command. */
 		}
 
@@ -332,8 +332,8 @@ namespace FMOD {
 			Started,                    /* Called when an instance starts. Parameters = unused. */
 			Stopped,                    /* Called when an instance stops. Parameters = unused. */
 			Idle,                       /* Called when an instance enters the idle state. Parameters = unused. */
-			CreateProgrammerSound,    /* Called when a programmer sound needs to be created in order to play a programmer instrument. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
-			DestroyProgrammerSound,   /* Called when a programmer sound needs to be destroyed. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
+			CreateProgrammerSound,      /* Called when a programmer sound needs to be created in order to play a programmer instrument. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
+			DestroyProgrammerSound,     /* Called when a programmer sound needs to be destroyed. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
 			Restarted                   /* Called when an instance is restarted due to a repeated start command. Parameters = unused. */
 		}
 
@@ -401,16 +401,17 @@ namespace FMOD {
 			// Initialization / system functions.
 			public static Result Create(out System studioSystem) {
 				if (previousSystem != null) {
-					//UnityEngine.Debug.LogError("Previous System found! Releasing resources.");
-					//FMOD.System lowLevel;
-					//previousSystem.GetLowLevelSystem(out lowLevel);
+					UnityEngine.Debug.LogWarning("Previous System found! Releasing resources.");
+					FMOD.System lowLevel;
+					previousSystem.GetLowLevelSystem(out lowLevel);
 
-					//if (lowLevel != null) {
-					//    lowLevel.Dispose();
-					//}
+					if (lowLevel != null) {
+						lowLevel.Dispose();
+					}
 
-					//previousSystem.Dispose();
+					previousSystem.Dispose();
 				}
+
 				Result result = Result.Ok;
 				IntPtr rawPtr;
 				studioSystem = null;
@@ -429,7 +430,7 @@ namespace FMOD {
 
 			public void Dispose() {
 				UnityEngine.Debug.LogError("Releasing FMOD Studio");
-				//this.UnloadAll();
+				this.UnloadAll();
 				this.Release();
 			}
 

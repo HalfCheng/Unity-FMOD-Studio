@@ -1372,11 +1372,6 @@ namespace FMOD {
 		'System' API.
 	*/
 	public class System : HandleBase, IDisposable {
-		~System() {
-			//UnityEngine.Debug.LogError("Deconstructor: FMOD System");
-			//this.Release();
-		}
-
 		public void Dispose() {
 			UnityEngine.Debug.LogError("Releasing FMOD System");
 			this.Close();
