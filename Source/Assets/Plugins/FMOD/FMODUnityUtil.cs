@@ -70,9 +70,11 @@ namespace FMOD {
 			/// </summary>
 			/// <returns></returns>
 			public static bool ForceLoadLowLevelBinary() {
+				Logger.Log("Loading Low Level Binary");
+
 				// This is a hack that forces Android to load the .so libraries in the correct order
 #if UNITY_ANDROID && !UNITY_EDITOR
-				FMOD.Studio.UnityUtil.Log("loading binaries: " + FMOD.Studio.STUDIO_VERSION.dll + " and " + FMOD.VERSION.dll);
+				Logger.Log("Loading binaries: " + FMOD.Studio.STUDIO_VERSION.dll + " and " + FMOD.VERSION.dll);
 				AndroidJavaClass jSystem = new AndroidJavaClass("java.lang.System");
 				jSystem.CallStatic("loadLibrary", FMOD.VERSION.dll);
 				jSystem.CallStatic("loadLibrary", FMOD.Studio.STUDIO_VERSION.dll);
@@ -80,16 +82,13 @@ namespace FMOD {
 
 				// Hack: force the low level binary to be loaded before accessing Studio API
 #if !UNITY_IPHONE || UNITY_EDITOR
-				Logger.Log("Loading Low Level Binary");
 				int temp1, temp2;
 				if (!Logger.ErrorCheck(FMOD.Memory.GetStats(out temp1, out temp2))) {
 					Logger.LogError("An error occured while loading Low Level Binary!");
 					return false;
 				}
-
-				Logger.Log("Low Level Binary successfully loaded!");
 #endif
-
+				Logger.Log("Low Level Binary successfully loaded!");
 				return true;
 			}
 			// ----------------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 /* ========================================================================================== */
+/*                                                                                            */
 /* FMOD System - C# Wrapper . Copyright (c), Firelight Technologies Pty, Ltd. 2004-2014.      */
 /* Modified by Xane (https://github.com/XaneFeather), Jul 2014                                */
-/*                                                                                            */
 /*                                                                                            */
 /* ========================================================================================== */
 
@@ -17,7 +17,7 @@ namespace FMOD {
 #elif (UNITY_PS4) && !UNITY_EDITOR
 		public const string dll    = "libfmodstudio";
 #else
-			public const string dll = "fmodstudio";
+			public const string DLL = "fmodstudio";
 #endif
 		}
 
@@ -345,7 +345,7 @@ namespace FMOD {
 			}
 
 			#region Imported Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_ParseID(byte[] idString, out GUID id);
 			#endregion
 		}
@@ -402,14 +402,14 @@ namespace FMOD {
 			public static Result Create(out System studioSystem) {
 				if (previousSystem != null) {
 					UnityEngine.Debug.LogWarning("Previous System found! Releasing resources.");
-					FMOD.System lowLevel;
-					previousSystem.GetLowLevelSystem(out lowLevel);
+					//FMOD.System lowLevel;
+					//previousSystem.GetLowLevelSystem(out lowLevel);
 
-					if (lowLevel != null) {
-						lowLevel.Dispose();
-					}
+					//if (lowLevel != null) {
+					//    lowLevel.Dispose();
+					//}
 
-					previousSystem.Dispose();
+					//previousSystem.Dispose();
 				}
 
 				Result result = Result.Ok;
@@ -660,67 +660,67 @@ namespace FMOD {
 			}
 
 			#region Imported Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_Create(out IntPtr studiosystem, uint headerversion);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_SetAdvancedSettings(IntPtr studiosystem, ref AdvancedSettings settings);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetAdvancedSettings(IntPtr studiosystem, out AdvancedSettings settings);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_Initialize(IntPtr studiosystem, int maxchannels, InitFlags studioFlags, FMOD.InitFlags flags, IntPtr extradriverdata);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_Release(IntPtr studiosystem);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_Update(IntPtr studiosystem);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetLowLevelSystem(IntPtr studiosystem, out IntPtr system);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetEvent(IntPtr studiosystem, ref GUID guid, LoadingMode mode, out IntPtr description);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetMixerStrip(IntPtr studiosystem, ref GUID guid, LoadingMode mode, out IntPtr mixerStrip);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetBank(IntPtr studiosystem, ref GUID guid, out IntPtr bank);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetSoundInfo(IntPtr studiosystem, byte[] key, out SoundInfoInternal info);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_LookupID(IntPtr studiosystem, byte[] path, out GUID guid);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_LookupPath(IntPtr studiosystem, ref GUID guid, [Out] byte[] path, int size, out int retrieved);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetListenerAttributes(IntPtr studiosystem, out FMOD3DAttributes attributes);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_SetListenerAttributes(IntPtr studiosystem, ref FMOD3DAttributes attributes);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_LoadBankFile(IntPtr studiosystem, byte[] filename, LoadBankFlags flags, out IntPtr bank);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_LoadBankMemory(IntPtr studiosystem, byte[] buffer, int length, LoadMemoryMode mode, LoadBankFlags flags, out IntPtr bank);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_LoadBankCustom(IntPtr studiosystem, ref BankInfo info, LoadBankFlags flags, out IntPtr bank);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_UnloadAll(IntPtr studiosystem);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_FlushCommands(IntPtr studiosystem);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_StartRecordCommands(IntPtr studiosystem, byte[] path, RecordCommandsFlags flags);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_StopRecordCommands(IntPtr studiosystem);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_PlaybackCommands(IntPtr studiosystem, byte[] path);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetBankCount(IntPtr studiosystem, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetBankList(IntPtr studiosystem, IntPtr[] array, int capacity, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetCPUUsage(IntPtr studiosystem, out CpuUsage usage);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetBufferUsage(IntPtr studiosystem, out BufferUsage usage);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_ResetBufferUsage(IntPtr studiosystem);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_SetCallback(IntPtr studiosystem, SYSTEM_CALLBACK callback, SystemCallbackType callbackmask);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_GetUserData(IntPtr studiosystem, out IntPtr userData);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_System_SetUserData(IntPtr studiosystem, IntPtr userData);
 			#endregion
 
@@ -903,53 +903,53 @@ namespace FMOD {
 			}
 
 			#region Imported Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetID(IntPtr eventdescription, out GUID id);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetPath(IntPtr eventdescription, [Out] byte[] path, int size, out int retrieved);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetParameterCount(IntPtr eventdescription, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetParameterByIndex(IntPtr eventdescription, int index, out ParameterDescriptionInternal parameter);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetParameter(IntPtr eventdescription, byte[] name, out ParameterDescriptionInternal parameter);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetUserPropertyCount(IntPtr eventdescription, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetUserPropertyByIndex(IntPtr eventdescription, int index, out UserPropertyInternal property);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetUserProperty(IntPtr eventdescription, byte[] name, out UserPropertyInternal property);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetLength(IntPtr eventdescription, out int length);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetMinimumDistance(IntPtr eventdescription, out float distance);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetMaximumDistance(IntPtr eventdescription, out float distance);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_IsOneshot(IntPtr eventdescription, out bool oneshot);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_IsStream(IntPtr eventdescription, out bool isStream);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_Is3D(IntPtr eventdescription, out bool is3D);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_CreateInstance(IntPtr eventdescription, out IntPtr instance);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetInstanceCount(IntPtr eventdescription, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetInstanceList(IntPtr eventdescription, IntPtr[] array, int capacity, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_LoadSampleData(IntPtr eventdescription);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_UnloadSampleData(IntPtr eventdescription);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetSampleLoadingState(IntPtr eventdescription, out LoadingState state);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_ReleaseAllInstances(IntPtr eventdescription);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_SetCallback(IntPtr eventdescription, EventCallback callback);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_GetUserData(IntPtr eventdescription, out IntPtr userData);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventDescription_SetUserData(IntPtr eventdescription, IntPtr userData);
 			#endregion
 			#region Wrapper Internal Methods
@@ -1120,67 +1120,67 @@ namespace FMOD {
 			}
 
 			#region Imported Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetDescription(IntPtr _event, out IntPtr description);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetVolume(IntPtr _event, out float volume);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetVolume(IntPtr _event, float volume);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetPitch(IntPtr _event, out float pitch);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetPitch(IntPtr _event, float pitch);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_Get3DAttributes(IntPtr _event, out FMOD3DAttributes attributes);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_Set3DAttributes(IntPtr _event, ref FMOD3DAttributes attributes);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetProperty(IntPtr _event, EventProperty index, out float value);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetProperty(IntPtr _event, EventProperty index, float value);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetPaused(IntPtr _event, out bool paused);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetPaused(IntPtr _event, bool paused);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_Start(IntPtr _event);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_Stop(IntPtr _event, StopNode mode);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetTimelinePosition(IntPtr _event, out int position);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetTimelinePosition(IntPtr _event, int position);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetPlaybackState(IntPtr _event, out PlaybackState state);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetChannelGroup(IntPtr _event, out IntPtr group);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_Release(IntPtr _event);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_IsVirtual(IntPtr _event, out bool virtualState);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetParameter(IntPtr _event, byte[] name, out IntPtr parameter);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetParameterByIndex(IntPtr _event, int index, out IntPtr parameter);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetParameterCount(IntPtr _event, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetParameterValue(IntPtr _event, byte[] name, float value);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetParameterValueByIndex(IntPtr _event, int index, float value);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetCue(IntPtr _event, byte[] name, out IntPtr cue);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetCueByIndex(IntPtr _event, int index, out IntPtr cue);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetCueCount(IntPtr _event, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_CreateSubEvent(IntPtr _event, byte[] name, out IntPtr _instance);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetCallback(IntPtr _event, EventCallback callback);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_GetUserData(IntPtr _event, out IntPtr userData);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_EventInstance_SetUserData(IntPtr _event, IntPtr userData);
 			#endregion
 
@@ -1199,7 +1199,7 @@ namespace FMOD {
 			}
 
 			#region Imported Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_CueInstance_Trigger(IntPtr cue);
 			#endregion
 
@@ -1233,11 +1233,11 @@ namespace FMOD {
 			}
 
 			#region Import Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_ParameterInstance_GetDescription(IntPtr parameter, out ParameterDescriptionInternal description);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_ParameterInstance_GetValue(IntPtr parameter, out float value);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_ParameterInstance_SetValue(IntPtr parameter, float value);
 			#endregion
 
@@ -1314,29 +1314,29 @@ namespace FMOD {
 			}
 
 			#region Imported Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_GetID(IntPtr strip, out GUID id);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_GetPath(IntPtr strip, [Out] byte[] path, int size, out int retrieved);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_GetFaderLevel(IntPtr strip, out float value);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_SetFaderLevel(IntPtr strip, float value);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_GetPaused(IntPtr strip, out bool paused);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_SetPaused(IntPtr strip, bool paused);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_GetMute(IntPtr strip, out bool mute);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_SetMute(IntPtr strip, bool mute);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_StopAllEvents(IntPtr strip, StopNode mode);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_GetChannelGroup(IntPtr strip, out IntPtr group);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_GetLoadingState(IntPtr strip, out LoadingState state);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_MixerStrip_Release(IntPtr strip);
 			#endregion
 
@@ -1465,27 +1465,27 @@ namespace FMOD {
 			}
 
 			#region Imported Methods
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetID(IntPtr bank, out GUID id);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetPath(IntPtr bank, [Out] byte[] path, int size, out int retrieved);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_Unload(IntPtr bank);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_LoadSampleData(IntPtr bank);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_UnloadSampleData(IntPtr bank);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetLoadingState(IntPtr bank, out LoadingState state);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetSampleLoadingState(IntPtr bank, out LoadingState state);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetEventCount(IntPtr bank, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetEventList(IntPtr bank, IntPtr[] array, int capacity, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetMixerStripCount(IntPtr bank, out int count);
-			[DllImport(StudioVersion.dll)]
+			[DllImport(StudioVersion.DLL)]
 			private static extern Result FMOD_Studio_Bank_GetMixerStripList(IntPtr bank, IntPtr[] array, int capacity, out int count);
 			#endregion
 

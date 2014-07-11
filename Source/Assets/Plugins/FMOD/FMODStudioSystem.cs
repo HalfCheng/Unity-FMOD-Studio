@@ -20,11 +20,11 @@ public class FMODStudioSystem : MonoBehaviour {
 	/// <summary>
 	/// Determins FMOD's DSP Buffer size
 	/// </summary>
-	public enum LatencyMode : int {
-		VeryLow = 0x0C8,
-		Low = 0x100,
-		Normal = 0x200,
-		High = 0x300
+	public enum BufferSizeMode : byte {
+		VeryLow = 8,
+		Low = 4,
+		Normal = 2,
+		High = 1
 	}
 	// ----------------------------------------------------------------------------------------------------
 	#endregion
@@ -33,10 +33,10 @@ public class FMODStudioSystem : MonoBehaviour {
 	// ----------------------------------------------------------------------------------------------------
 	#region Exposed Variables
 	/// <summary>
-	/// The latency mode.
+	/// The DSP's buffer size.
 	/// </summary>
 	[SerializeField]
-	private LatencyMode latencyMode = LatencyMode.Normal;
+	private BufferSizeMode bufferSize = BufferSizeMode.Normal;
 
 	/// <summary>
 	/// The plugin paths
@@ -240,8 +240,12 @@ public class FMODStudioSystem : MonoBehaviour {
 	/// Updates the size of the DSP buffer.
 	/// </summary>
 	private void UpdateDSPBufferSize() {
-		Logger.LogMessage("Changed DSP Buffer Size to " + (uint)latencyMode + " ms.");
-		lowLevelSystem.SetDSPBufferSize((uint)latencyMode, 4);
+		int bufferSizeMode = (int)this.bufferSize;
+		uint bufferSize = (uint)(512 / bufferSizeMode);
+		int bufferCount = 2 * bufferSizeMode;
+
+		Logger.LogMessage("Changed DSP Buffer Size to " + bufferSize + " ms.");
+		lowLevelSystem.SetDSPBufferSize(bufferSize, bufferCount);
 	}
 	// ----------------------------------------------------------------------------------------------------
 	#endregion
@@ -559,6 +563,16 @@ public class FMODStudioSystem : MonoBehaviour {
 	/// <param name="position">The position.</param>
 	public void PlayOneShot(string path, Vector3 position) {
 		PlayOneShot(path, position, 1.0f);
+	}
+
+	/// <summary>
+	/// Plays the one shot.
+	/// </summary>
+	/// <param name="path">The path.</param>
+	/// <param name="position">The position.</param>
+	/// <param name="volume">The volume.</param>
+	private void PlayOneShot(FMODAsset asset, Vector3 position, float volume) {
+		PlayOneShot(asset.id, position, volume);
 	}
 
 	/// <summary>
